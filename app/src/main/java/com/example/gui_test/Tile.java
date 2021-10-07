@@ -14,4 +14,12 @@ public class Tile {
         isInDeck = 0;
         isOnBoard = false;
     }
+
+    public Tile(Tile tile){
+        this.letter = tile.letter;
+        this.points = tile.points;
+
+        this.isInDeck = tile.isInDeck;
+        this.isOnBoard = tile.isOnBoard;
+    }
 }

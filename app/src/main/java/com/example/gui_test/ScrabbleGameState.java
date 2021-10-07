@@ -1,12 +1,13 @@
 package com.example.gui_test;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Timer;
 
 public class ScrabbleGameState {
     private Player[] players;
     private int playerTurn; //index for the player whose turn it is
-    private Board board;
+    private Board scrabbleBoard;
     private Bag bag;
     private Timer timer;
 
@@ -20,7 +21,7 @@ public class ScrabbleGameState {
         playerTurn = 0;
 
         //create new board
-        board = new Board();
+        scrabbleBoard = new Board();
 
         //create new scrabble bag
         bag = new Bag();
@@ -30,7 +31,7 @@ public class ScrabbleGameState {
 
     }
     //deep copy constructor
-    public ScrabbleGameState(ScrabbleGameState s){
+    public ScrabbleGameState(ScrabbleGameState s, int player){
 
         //create 4 new players for the game
         players = new Player[4];
@@ -42,12 +43,10 @@ public class ScrabbleGameState {
         playerTurn = s.playerTurn;
 
         //create new board
-        board = new Board();
-        board = s.board;
+        scrabbleBoard = new Board(s.scrabbleBoard);
 
         //create new scrabble bag
-        bag = new Bag();
-        bag = s.bag;
+        bag = new Bag(s.bag);
 
         //create new Timer
         timer = new Timer();
@@ -64,8 +63,10 @@ public class ScrabbleGameState {
         return true;
     }
 
-    public boolean placeLetter(){
-        return false;
+    public boolean placeLetter(Tile tile){
+        Random rnd = new Random();
+        scrabbleBoard.addToBoard(tile, rnd.nextInt(), rnd.nextInt());
+        return true;
     };
 
     public boolean clear(){
