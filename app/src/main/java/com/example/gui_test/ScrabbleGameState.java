@@ -1,5 +1,6 @@
 package com.example.gui_test;
 
+import java.util.ArrayList;
 import java.util.Timer;
 
 public class ScrabbleGameState {
@@ -53,9 +54,15 @@ public class ScrabbleGameState {
         timer = s.timer;
     };
 
-    public boolean drawLetter(){
-        return false;
-    };
+    public boolean drawLetter(Player player, Bag b){
+        if (player != players[playerTurn]) {
+            return false;
+        }
+
+        //add a random tile to the player's deck
+        player.setDeck(b.get());
+        return true;
+    }
 
     public boolean placeLetter(){
         return false;
@@ -65,16 +72,44 @@ public class ScrabbleGameState {
         return false;
     };
 
-    public boolean exchangeLetter() {
-        return false;
+    public boolean exchangeLetter(Player player, Bag b, Tile[] selectedTiles) {
+
+        //Check if it's the current player's turn
+        if (player != players[playerTurn]) {
+            return false;
+        }
+
+
+
+        //Remove tiles from player's deck
+        //add tiles back to bag
+        for (Tile tile: selectedTiles){
+            player.removeFromDeck(tile);
+            b.put(tile);
+        }
+
+        //end player's turn
+
+        endTurn(player);
+
+        return true;
+
+
     }
 
     public boolean displayRules(){
         return false;
     }
 
-    public boolean endTurn(){
-        return false;
+    public boolean endTurn(Player player){
+        if (player != players[playerTurn]) {
+            return false;
+        }
+        if (player == players[0])
+        {
+        return true;
+        }
+        return true;
     }
 
     @Override
