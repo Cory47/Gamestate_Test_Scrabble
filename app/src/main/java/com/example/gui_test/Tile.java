@@ -22,4 +22,8 @@ public class Tile {
         this.isInDeck = tile.isInDeck;
         this.isOnBoard = tile.isOnBoard;
     }
+
+    public String getName() {
+        return letter;
+    }
 }

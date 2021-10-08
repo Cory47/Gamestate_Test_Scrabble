@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Step 1: Find the object of elements to interact
         EditText editText = (EditText) findViewById(R.id.editText);
+        editText.setText("Test!!");
 
         View runTestButton = (View) findViewById(R.id.runTestButton);
 
@@ -25,7 +26,13 @@ public class MainActivity extends AppCompatActivity {
         runTestButton.setOnClickListener(new View.OnClickListener() {
             //3 what to do with a click
             public void onClick(View v) {
-                editText.setText("Test!!");
+                editText.setText("");
+                ScrabbleGameState firstInstance = new ScrabbleGameState();
+                ScrabbleGameState secondInstance = new ScrabbleGameState(firstInstance, 0);
+                editText.setText(firstInstance.toString());
+
+
+                ;
             }
         });
 

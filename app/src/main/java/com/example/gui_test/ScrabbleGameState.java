@@ -29,6 +29,17 @@ public class ScrabbleGameState {
         //create new Timer
         timer = new Timer();
 
+        //Give players their decks
+        for (int i = 0; i < 4; i++) {
+            drawLetter(players[i], bag);
+            drawLetter(players[i], bag);
+            drawLetter(players[i], bag);
+            drawLetter(players[i], bag);
+            drawLetter(players[i], bag);
+            drawLetter(players[i], bag);
+            drawLetter(players[i], bag);
+        }
+
     }
     //deep copy constructor
     public ScrabbleGameState(ScrabbleGameState s, int player){
@@ -115,6 +126,16 @@ public class ScrabbleGameState {
 
     @Override
     public String toString(){
-        return null;
+        String toReturn = new String("Current Player turn is:" + (playerTurn + 1));
+        toReturn = toReturn +  "\nLetters in the bag are:" + bag.toString();
+        toReturn = toReturn +"\nHere are current player's letters: ";
+
+        for (int i = 0; i < 4; i++ ){
+            toReturn = toReturn + "\nPlayer" + (i + 1);
+
+            toReturn = toReturn + players[i].toString();
+        }
+
+        return toReturn;
     }
 }
