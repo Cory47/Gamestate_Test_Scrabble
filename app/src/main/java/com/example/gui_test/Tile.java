@@ -1,3 +1,7 @@
+/*
+ * @author Cory Marleau, Harrison Winters, Kamalii Silva, Jason Katayama
+ *
+ * */
 package com.example.gui_test;
 
 public class Tile {
