@@ -18,12 +18,7 @@ public class Bag {
         tiles.add(new Tile("a", 1));
         tiles.add(new Tile("a", 1));
         tiles.add(new Tile("a", 1));
-        tiles.add(new Tile("a", 1));
-        tiles.add(new Tile("a", 1));
 
-        tiles.add(new Tile("b", 3));
-        tiles.add(new Tile("b", 3));
-        tiles.add(new Tile("b", 3));
         tiles.add(new Tile("b", 3));
         tiles.add(new Tile("b", 3));
         tiles.add(new Tile("b", 3));
@@ -33,11 +28,7 @@ public class Bag {
         tiles.add(new Tile("c", 3));
         tiles.add(new Tile("c", 3));
         tiles.add(new Tile("c", 3));
-        tiles.add(new Tile("c", 3));
-        tiles.add(new Tile("c", 3));
 
-        tiles.add(new Tile("d", 2));
-        tiles.add(new Tile("d", 2));
         tiles.add(new Tile("d", 2));
         tiles.add(new Tile("d", 2));
         tiles.add(new Tile("d", 2));
@@ -47,15 +38,7 @@ public class Bag {
         tiles.add(new Tile("e", 1));
         tiles.add(new Tile("e", 1));
         tiles.add(new Tile("e", 1));
-        tiles.add(new Tile("e", 1));
-        tiles.add(new Tile("e", 1));
 
-
-
-        tiles.add(new Tile("f", 4));
-        tiles.add(new Tile("f", 4));
-        tiles.add(new Tile("f", 4));
-        tiles.add(new Tile("f", 4));
         tiles.add(new Tile("f", 4));
         tiles.add(new Tile("f", 4));
         tiles.add(new Tile("f", 4));
@@ -65,29 +48,16 @@ public class Bag {
         tiles.add(new Tile("g", 2));
         tiles.add(new Tile("g", 2));
         tiles.add(new Tile("g", 2));
-        tiles.add(new Tile("g", 2));
-        tiles.add(new Tile("g", 2));
-        tiles.add(new Tile("g", 2));
-        tiles.add(new Tile("g", 2));
-        tiles.add(new Tile("g", 2));
-        tiles.add(new Tile("g", 2));
-        tiles.add(new Tile("g", 2));
-        tiles.add(new Tile("g", 2));
-        tiles.add(new Tile("g", 2));
 
-        tiles.add(new Tile("h", 4));
-        tiles.add(new Tile("h", 4));
         tiles.add(new Tile("h", 4));
         tiles.add(new Tile("h", 4));
         tiles.add(new Tile("h", 4));
         tiles.add(new Tile("h", 4));
 
         tiles.add(new Tile("i", 1));
-        tiles.add(new Tile("j", 8));
-        tiles.add(new Tile("k", 5));
-        tiles.add(new Tile("l", 1));
-
-
+        tiles.add(new Tile("i", 1));
+        tiles.add(new Tile("i", 1));
+        tiles.add(new Tile("i", 1));
     }
 
     public Bag(Bag bag){
@@ -105,7 +75,17 @@ public class Bag {
         tiles.add(newTile);
     }
 
+    /**
+     * get - Helper to get specific tiles instead of random, for debugging
+     * @return
+     */
     public Tile get(){
+        Tile temp = tiles.get(0);
+        tiles.remove(0);
+        return temp;
+    }
+
+    public Tile getRnd(){
         int index = rnd.nextInt(tiles.size());
         Tile temp = tiles.get(index);
         tiles.remove(index);
@@ -117,7 +97,7 @@ public class Bag {
     public String toString() {
         String toReturn = new String("");
         for (int i = 0; i < tiles.size(); i++) {
-            toReturn = toReturn + "\n" + tiles.get(i).getName();
+            toReturn = toReturn + "-" + tiles.get(i).getName();
         }
 
         return toReturn;

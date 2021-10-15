@@ -37,7 +37,7 @@ public class Player {
     public String toString() {
         String toReturn = new String("");
         for (int i = 0; i < deck.size(); i++) {
-            toReturn =  toReturn +  "\n" + deck.get(i).getName();
+            toReturn =  toReturn +  "-" + deck.get(i).getName();
         }
         return toReturn;
     }

@@ -23,7 +23,7 @@ public class ScrabbleGameState {
             players[i] = new Player("Player" + i);
         }
         //choose which player's turn it is
-        playerTurn = 0;
+        playerTurn = -1;
 
         //create new board
         scrabbleBoard = new Board();
@@ -35,19 +35,15 @@ public class ScrabbleGameState {
         timer = new Timer();
 
         //Give players their decks
-        for (int i = 0; i < 4; i++) {
-            drawLetter(players[i], bag);
-            drawLetter(players[i], bag);
-            drawLetter(players[i], bag);
-            drawLetter(players[i], bag);
-            drawLetter(players[i], bag);
-            drawLetter(players[i], bag);
-            drawLetter(players[i], bag);
+        for (int i = 0; i < 7; i++) {
+            for (int q = 0; q < 4; q++) {
+                drawLetter(players[q]);
+            }
         }
 
     }
     //deep copy constructor
-    public ScrabbleGameState(ScrabbleGameState s, int player){
+    public ScrabbleGameState(ScrabbleGameState s){
 
         //create 4 new players for the game
         players = new Player[4];
@@ -56,7 +52,7 @@ public class ScrabbleGameState {
         }
 
         //choose which player's turn it is
-        playerTurn = s.playerTurn;
+        playerTurn = s.playerTurn + 1;
 
         //create new board
         scrabbleBoard = new Board(s.scrabbleBoard);
@@ -69,13 +65,35 @@ public class ScrabbleGameState {
         timer = s.timer;
     };
 
-    public boolean drawLetter(Player player, Bag b){
-        if (player != players[playerTurn]) {
+    public boolean drawRandLetter(Player player){
+        if (playerTurn < 0) {
+            player.setDeck(bag.get());
+            return true;
+        }
+        if (player != players[playerTurn]){
             return false;
         }
-
         //add a random tile to the player's deck
-        player.setDeck(b.get());
+        player.setDeck(bag.get());
+        return true;
+    }
+
+    /**
+     * drawLetter - Method for drawing specific letters
+     * @param player
+     * @return true if a valid move
+     */
+
+    public boolean drawLetter(Player player){
+        if (playerTurn < 0) {
+            player.setDeck(bag.get());
+            return true;
+        }
+        if (player != players[playerTurn]){
+            return false;
+        }
+        //add a random tile to the player's deck
+        player.setDeck(bag.get());
         return true;
     }
 
@@ -89,25 +107,23 @@ public class ScrabbleGameState {
         return false;
     };
 
-    public boolean exchangeLetter(Player player, Bag b, Tile[] selectedTiles) {
+    public boolean exchangeLetter(int player) {
 
         //Check if it's the current player's turn
-        if (player != players[playerTurn]) {
+        if (player != playerTurn) {
             return false;
         }
 
-
-
         //Remove tiles from player's deck
+        ArrayList<Tile> temp = new ArrayList<>();
+        temp = players[player].getDeck();
+        players[player].removeFromDeck(temp.get(0));
         //add tiles back to bag
-        for (Tile tile: selectedTiles){
-            player.removeFromDeck(tile);
-            b.put(tile);
-        }
+        players[player].setDeck(bag.get());
 
         //end player's turn
 
-        endTurn(player);
+        endTurn(players[player]);
 
         return true;
 
@@ -131,7 +147,7 @@ public class ScrabbleGameState {
 
     @Override
     public String toString(){
-        String toReturn = new String("Current Player turn is:" + (playerTurn + 1));
+        String toReturn = new String("Current Player turn is: " + (playerTurn + 1));
         toReturn = toReturn +  "\nLetters in the bag are:" + bag.toString();
         toReturn = toReturn +"\nHere are current player's letters: ";
 
@@ -140,6 +156,8 @@ public class ScrabbleGameState {
 
             toReturn = toReturn + players[i].toString();
         }
+
+        toReturn = toReturn + "\n\n";
 
         return toReturn;
     }

@@ -31,12 +31,16 @@ public class MainActivity extends AppCompatActivity {
             //3 what to do with a click
             public void onClick(View v) {
                 editText.setText("");
+                //first
                 ScrabbleGameState firstInstance = new ScrabbleGameState();
-                ScrabbleGameState secondInstance = new ScrabbleGameState(firstInstance, 0);
-                editText.setText(firstInstance.toString());
+                //second
+                ScrabbleGameState secondInstance = new ScrabbleGameState(firstInstance);
+                //secondInstance.exchangeLetter(1);
+
+                //print the states
+                editText.setText(firstInstance.toString() + secondInstance.toString());
 
 
-                ;
             }
         });
 
