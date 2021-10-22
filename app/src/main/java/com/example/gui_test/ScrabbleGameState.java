@@ -116,10 +116,13 @@ public class ScrabbleGameState {
         }
 
         //Remove tiles from player's deck
-        ArrayList<Tile> temp = new ArrayList<>();
-        temp = players[player].getDeck();
-        players[player].removeFromDeck(temp.get(idx));
+        ArrayList<Tile> deck = players[player].getDeck();
+
         //add tiles back to bag
+        bag.put(deck.get(idx));
+        //remove from player hand
+        players[player].removeFromDeck(idx);
+        //draw new tiles
         players[player].setDeck(bag.get());
 
         //end player's turn

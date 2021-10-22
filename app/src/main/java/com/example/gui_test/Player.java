@@ -23,9 +23,10 @@ public class Player {
         deck.add(t);
     }
 
-    public void removeFromDeck(Tile t) {
-        deck.remove(t);
-
+    public Tile removeFromDeck(int idx) {
+        Tile tile = deck.get(idx);
+        deck.remove(idx);
+        return tile;
     }
 
     public ArrayList<Tile> getDeck() {
