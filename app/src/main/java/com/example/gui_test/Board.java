@@ -26,6 +26,21 @@ public class Board {
     }
 
     public void addToBoard(Tile tile, int i, int j){
+        board[i][j].setTile(tile);
+    }
 
+    public String toString() {
+        String toReturn = "";
+        for(int i = 0; i < 15; i++) {
+            for (int j = 0; j < 15; j++){
+                if (board[i][j].getTile() == null) {
+                    toReturn = toReturn + "*";
+                } else {
+                    toReturn = toReturn + board[i][j].getTile().getLetter();
+                }
+            }
+            toReturn = toReturn + "\n";
+        }
+        return toReturn;
     }
 }

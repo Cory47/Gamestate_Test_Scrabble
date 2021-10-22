@@ -25,20 +25,24 @@ public class MainActivity extends AppCompatActivity {
 
         View runTestButton = (View) findViewById(R.id.runTestButton);
 
-        //Step 2: Set up listeners for the objects
-
+        //Step 2: Set up listeners for the object
         runTestButton.setOnClickListener(new View.OnClickListener() {
             //3 what to do with a click
             public void onClick(View v) {
                 editText.setText("");
                 //first
                 ScrabbleGameState firstInstance = new ScrabbleGameState();
+                //player swaps out all their letters
+                for (int i = 0; i < 7; i++) {
+                    firstInstance.exchangeLetter(0, i);
+                }
                 //second
                 ScrabbleGameState secondInstance = new ScrabbleGameState(firstInstance);
-                //secondInstance.exchangeLetter(1);
+                secondInstance.placeLetter(1, 6);
+                ScrabbleGameState thirdInstance = new ScrabbleGameState(secondInstance);
 
                 //print the states
-                editText.setText(firstInstance.toString() + secondInstance.toString());
+                editText.setText(firstInstance.toString() + secondInstance.toString() + thirdInstance.toString());
 
 
             }

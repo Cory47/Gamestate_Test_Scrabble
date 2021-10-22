@@ -27,7 +27,7 @@ public class Tile {
         this.isOnBoard = tile.isOnBoard;
     }
 
-    public String getName() {
+    public String getLetter() {
         return letter;
     }
 }

@@ -97,7 +97,7 @@ public class Bag {
     public String toString() {
         String toReturn = new String("");
         for (int i = 0; i < tiles.size(); i++) {
-            toReturn = toReturn + "-" + tiles.get(i).getName();
+            toReturn = toReturn + "-" + tiles.get(i).getLetter();
         }
 
         return toReturn;

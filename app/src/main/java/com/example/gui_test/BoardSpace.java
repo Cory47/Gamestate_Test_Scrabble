@@ -41,12 +41,14 @@ public class BoardSpace {
                     (cx + width/2) - border,
                     (cy + height/2) - border,
                     tileColor);
-            //draw the letter for the tile
-            //canvas.drawText(""+ value,
-            // (cx - width/2) + border,
-            // (cy + height/2) - border,
-            // secondaryColor);
         }
+    }
+    public Tile getTile(){
+        return tile;
+    }
+
+    public void setTile(Tile tile) {
+        this.tile = tile;
     }
 }
 

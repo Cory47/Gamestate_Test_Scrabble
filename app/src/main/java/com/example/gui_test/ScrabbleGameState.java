@@ -97,9 +97,10 @@ public class ScrabbleGameState {
         return true;
     }
 
-    public boolean placeLetter(Tile tile){
+    public boolean placeLetter(int playerIdx, int idx){
         Random rnd = new Random();
-        scrabbleBoard.addToBoard(tile, rnd.nextInt(), rnd.nextInt());
+        Tile tile = players[playerIdx].getDeck().get(idx);
+        scrabbleBoard.addToBoard(tile, rnd.nextInt(15), rnd.nextInt(15));
         return true;
     };
 
@@ -107,7 +108,7 @@ public class ScrabbleGameState {
         return false;
     };
 
-    public boolean exchangeLetter(int player) {
+    public boolean exchangeLetter(int player, int idx) {
 
         //Check if it's the current player's turn
         if (player != playerTurn) {
@@ -117,7 +118,7 @@ public class ScrabbleGameState {
         //Remove tiles from player's deck
         ArrayList<Tile> temp = new ArrayList<>();
         temp = players[player].getDeck();
-        players[player].removeFromDeck(temp.get(0));
+        players[player].removeFromDeck(temp.get(idx));
         //add tiles back to bag
         players[player].setDeck(bag.get());
 
@@ -150,7 +151,7 @@ public class ScrabbleGameState {
         String toReturn = new String("Current Player turn is: " + (playerTurn + 1));
         toReturn = toReturn +  "\nLetters in the bag are:" + bag.toString();
         toReturn = toReturn +"\nHere are current player's letters: ";
-
+        toReturn += "\nThis is the state of the board: \n" + scrabbleBoard.toString();
         for (int i = 0; i < 4; i++ ){
             toReturn = toReturn + "\nPlayer" + (i + 1);
 
