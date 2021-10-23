@@ -33,21 +33,30 @@ public class MainActivity extends AppCompatActivity {
                 //first
                 ScrabbleGameState firstInstance = new ScrabbleGameState();
                 editText.setText(firstInstance.toString());
+                firstInstance.endTurn(-1);
 
                 //second
                 ScrabbleGameState secondInstance = new ScrabbleGameState(firstInstance);
                 //First player swaps out all their letters
                 for (int i = 0; i < 3; i++) {
-                    secondInstance.exchangeLetter(0, i);
+                    secondInstance.exchangeLetter(0, 0);
                 }
                 editText.append(secondInstance.toString());
+                secondInstance.endTurn(0);
 
                 //third
                 ScrabbleGameState thirdInstance = new ScrabbleGameState(secondInstance);
-                thirdInstance.placeLetter(1, 6);
+                if(thirdInstance.placeLetter(1, 6, 7, 7)){
+                    thirdInstance.endTurn(1);
+                }
                 editText.append(thirdInstance.toString());
-                //print the states
-                //editText.setText(firstInstance.toString() + secondInstance.toString() + thirdInstance.toString());
+
+                //fourth
+                ScrabbleGameState fourthInstance = new ScrabbleGameState(thirdInstance);
+                for (int i = 0; i < 4; i++){
+                    fourthInstance.exchangeLetter(2, 3);
+                }
+                editText.append(fourthInstance.toString());
 
 
             }

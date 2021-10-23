@@ -34,7 +34,7 @@ public class Board {
         for(int i = 0; i < 15; i++) {
             for (int j = 0; j < 15; j++){
                 if (board[i][j].getTile() == null) {
-                    toReturn = toReturn + "*";
+                    toReturn = toReturn + "* ";
                 } else {
                     toReturn = toReturn + board[i][j].getTile().getLetter();
                 }
@@ -42,5 +42,16 @@ public class Board {
             toReturn = toReturn + "\n";
         }
         return toReturn;
+    }
+
+    public boolean isEmpty(){
+        for (int i = 0; i < 15; i++){
+            for (int q = 0; q < 15; q++){
+                if(board[i][q].getTile() != null){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

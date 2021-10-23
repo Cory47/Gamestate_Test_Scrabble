@@ -24,13 +24,17 @@ public class Player {
     }
 
     public Tile removeFromDeck(int idx) {
-        Tile tile = deck.get(idx);
+        Tile toReturn = deck.get(idx);
         deck.remove(idx);
-        return tile;
+        return toReturn;
     }
 
     public ArrayList<Tile> getDeck() {
         return deck;
+    }
+
+    public Tile getTile(int idx){
+        return deck.get(idx);
     }
 
 
