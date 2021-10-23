@@ -29,36 +29,35 @@ public class MainActivity extends AppCompatActivity {
         runTestButton.setOnClickListener(new View.OnClickListener() {
             //3 what to do with a click
             public void onClick(View v) {
+                //1
                 editText.setText("");
-                //first
+                //2
                 ScrabbleGameState firstInstance = new ScrabbleGameState();
-                editText.setText(firstInstance.toString());
-                firstInstance.endTurn(-1);
-
-                //second
+                //3
                 ScrabbleGameState secondInstance = new ScrabbleGameState(firstInstance);
-                //First player swaps out all their letters
+                //4
+                editText.setText("First Instance:\n" + firstInstance.toString());
+                //5
+                //          1st Move - First player exchanges 3 letters
                 for (int i = 0; i < 3; i++) {
-                    secondInstance.exchangeLetter(0, 0);
+                    firstInstance.exchangeLetter(0, 0);
                 }
-                editText.append(secondInstance.toString());
-                secondInstance.endTurn(0);
-
-                //third
-                ScrabbleGameState thirdInstance = new ScrabbleGameState(secondInstance);
-                if(thirdInstance.placeLetter(1, 6, 7, 7)){
-                    thirdInstance.endTurn(1);
-                }
-                editText.append(thirdInstance.toString());
-
-                //fourth
-                ScrabbleGameState fourthInstance = new ScrabbleGameState(thirdInstance);
+                firstInstance.endTurn(0);
+                /*          2nd Move - Second player places letter at index 6 in hand
+                                        in the middle of the board */
+                firstInstance.placeLetter(1, 6, 7, 7);
+                firstInstance.endTurn(1);
+                //          3rd Move - Third player exchanges 4 letters
                 for (int i = 0; i < 4; i++){
-                    fourthInstance.exchangeLetter(2, 3);
+                    firstInstance.exchangeLetter(2, 3);
                 }
-                editText.append(fourthInstance.toString());
-
-
+                firstInstance.endTurn(2);
+                editText.append("First Instance:\n" + firstInstance.toString());
+                //6
+                ScrabbleGameState thirdInstance = new ScrabbleGameState();
+                //7
+                editText.append("Second Instance:\n" + secondInstance.toString());
+                editText.append("Third Instance:\n" + thirdInstance.toString());
             }
         });
 

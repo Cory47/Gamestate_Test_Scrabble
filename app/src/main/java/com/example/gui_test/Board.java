@@ -20,7 +20,7 @@ public class Board {
         board = new BoardSpace[15][15];
         for (int i = 0; i < 15; i++){
             for (int j = 0; j < 15; j++){
-                this.board[i][j] = b.board[i][j];
+                board[i][j] = new BoardSpace(b.board[i][j]);
             }
         }
     }

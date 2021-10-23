@@ -9,11 +9,21 @@ import java.util.ArrayList;
 public class Player {
 
     private String name;
-    private ArrayList<Tile> deck = new ArrayList<Tile>();
+    private ArrayList<Tile> deck;
     private int score;
 
     public Player(String n){
         name = n;
+        deck = new ArrayList<Tile>();
+        score = 0;
+    }
+
+    public Player(Player other){
+        name = other.name;
+        deck = new ArrayList<>();
+        for(int i = other.deck.size() - 1; i >= 0; i--){
+            deck.add(new Tile(other.deck.get(i)));
+        }
     }
 
     public void setDeck(Tile t) {

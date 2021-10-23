@@ -34,6 +34,24 @@ public class BoardSpace {
         letterColor.setARGB(255, 0,0,0);
     }
 
+    public BoardSpace (BoardSpace other){
+        cx = other.cx;
+        cy = other.cy;
+        height = other.height;
+        width = other.width;
+        if(other.tile == null){
+            tile = null;
+        }
+        else {
+            tile = new Tile(other.tile);
+        }
+        multiplier = other.multiplier;
+        border = other.border;
+
+        tileColor = new Paint(other.tileColor);
+        letterColor = new Paint(other.letterColor);
+    }
+
     public void draw(Canvas canvas){
         if (tile != null){
             canvas.drawRect((cx - width/2) + border,

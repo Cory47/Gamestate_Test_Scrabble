@@ -23,7 +23,7 @@ public class ScrabbleGameState {
             players[i] = new Player("Player" + i);
         }
         //choose which player's turn it is
-        playerTurn = -1;
+        playerTurn = 0;
 
         //create new board
         scrabbleBoard = new Board();
@@ -40,33 +40,32 @@ public class ScrabbleGameState {
                 drawLetter(players[q]);
             }
         }
-
     }
+
     //deep copy constructor
     public ScrabbleGameState(ScrabbleGameState s){
-
         //create 4 new players for the game
         players = new Player[4];
         for (int i = 0; i < 4; i++) {
-            players[i] = s.players[i];
+            players[i] = new Player(s.players[i]);
         }
-
         //choose which player's turn it is
         playerTurn = s.playerTurn;
-
         //create new board
         scrabbleBoard = new Board(s.scrabbleBoard);
-
         //create new scrabble bag
         bag = new Bag(s.bag);
-
         //create new Timer
         timer = new Timer();
-        timer = s.timer;
     };
 
+    /**
+     * drawLetter - Method for drawing random letters
+     * @param player
+     * @return true if a valid move
+     */
     public boolean drawRandLetter(Player player){
-        if (playerTurn < 0) {
+        if (scrabbleBoard.isEmpty()) {
             player.setDeck(bag.get());
             return true;
         }
@@ -84,7 +83,7 @@ public class ScrabbleGameState {
      * @return true if a valid move
      */
     public boolean drawLetter(Player player){
-        if (playerTurn < 0) {
+        if (scrabbleBoard.isEmpty()) {
             player.setDeck(bag.get());
             return true;
         }
