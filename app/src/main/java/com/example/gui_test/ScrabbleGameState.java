@@ -1,4 +1,4 @@
-/*
+/**
 * @author Cory Marleau, Harrison Winters, Kamalii Silva, Jason Katayama
 *
 * */
