@@ -17,7 +17,14 @@ public class BoardSpace {
     private Paint tileColor;
     private Paint letterColor;
 
-
+    /**
+     * BoardSpace - constructor for the BoardSpace object
+     * @param x left edge location for space
+     * @param y top edge location for space
+     * @param h height of space
+     * @param w width of space
+     * @param mult multiplier value of space
+     */
     public BoardSpace(float x, float y, float h, float w, int mult){
         cx = x;
         cy = y;
@@ -34,6 +41,10 @@ public class BoardSpace {
         letterColor.setARGB(255, 0,0,0);
     }
 
+    /**
+     * BoardSpace - copy constructor
+     * @param other BoardSpace object to be copied
+     */
     public BoardSpace (BoardSpace other){
         cx = other.cx;
         cy = other.cy;
@@ -52,6 +63,10 @@ public class BoardSpace {
         letterColor = new Paint(other.letterColor);
     }
 
+    /**
+     * draw - draws each space onto the board
+     * @param canvas canvas to draw
+     */
     public void draw(Canvas canvas){
         if (tile != null){
             canvas.drawRect((cx - width/2) + border,
@@ -61,12 +76,41 @@ public class BoardSpace {
                     tileColor);
         }
     }
+
+    /**
+     * getTile - gets the tile in the space
+     * @return tile
+     */
     public Tile getTile(){
         return tile;
     }
 
+    /**
+     * setTile - sets the tile of the space
+     * @param tile to set to
+     */
     public void setTile(Tile tile) {
         this.tile = tile;
+    }
+
+    /**
+     * equals - overwrites equals method
+     * @param object
+     * @return
+     */
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof BoardSpace)) {
+            return false;
+        }
+        BoardSpace space = (BoardSpace) object;
+        if(!(space.tile.equals(tile))){
+            return false;
+        }
+        if(space.multiplier != multiplier){
+            return false;
+        }
+        return true;
     }
 }
 

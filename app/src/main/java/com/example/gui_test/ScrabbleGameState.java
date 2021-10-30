@@ -1,6 +1,8 @@
 /**
 * @author Cory Marleau, Harrison Winters, Kamalii Silva, Jason Katayama
-*
+* @version 29 October 2021
+ *              - Fixed Comments
+ *              - Add override equals methods
 * */
 
 package com.example.gui_test;
@@ -16,11 +18,14 @@ public class ScrabbleGameState {
     private Bag bag;
     private Timer timer;
 
+    /**
+     * ScrabbleGameState - constructor for the ScrabbleGameState class
+     */
     public ScrabbleGameState(){
         //create 4 new players for the game
         players = new Player[4];
         for (int i = 0; i < 4; i++) {
-            players[i] = new Player("Player" + i);
+            players[i] = new Player("Player " + i);
         }
         //choose which player's turn it is
         playerTurn = 0;
@@ -42,7 +47,10 @@ public class ScrabbleGameState {
         }
     }
 
-    //deep copy constructor
+    /**
+     * ScrabbleGameState - copy constructor
+     * @param s the ScrabbleGameState to deep copy
+     */
     public ScrabbleGameState(ScrabbleGameState s){
         //create 4 new players for the game
         players = new Player[4];
@@ -60,8 +68,8 @@ public class ScrabbleGameState {
     };
 
     /**
-     * drawLetter - Method for drawing random letters
-     * @param player
+     * drawRandLetter - Method for drawing random letters
+     * @param player Player object which the letters will be drawn to
      * @return true if a valid move
      */
     public boolean drawRandLetter(Player player){
@@ -79,7 +87,7 @@ public class ScrabbleGameState {
 
     /**
      * drawLetter - Method for drawing specific letters
-     * @param player
+     * @param player Player object which the letters will be drawn to
      * @return true if a valid move
      */
     public boolean drawLetter(Player player){
@@ -96,7 +104,7 @@ public class ScrabbleGameState {
     }
 
     /**
-     * Action for placing a letter
+     * placeLetter - Action for placing a letter
      * @param playerIdx which player is using this action
      * @param letterIdx which letter from the hand is being placed
      * @return
@@ -120,20 +128,21 @@ public class ScrabbleGameState {
         Tile tile = players[playerIdx].getDeck().get(letterIdx);
         scrabbleBoard.addToBoard(tile, x, y);
         return true;
-    };
+    }
 
     /**
-     * action to clear any movement
+     * clear - action to clear any movement
+     * *could take in the official game state as a parameter and re-copy it
      * @return valid move
      */
     public boolean clear(){
         return false;
-    };
+    }
 
     /**
-     * exchange letter action
-     * @param playerIdx
-     * @param letterIdx
+     * exchangeLetter - exchange letter action
+     * @param playerIdx index of the player that sent the action
+     * @param letterIdx index to position of letter in player's hand
      * @return if it is a valid move
      */
     public boolean exchangeLetter(int playerIdx, int letterIdx) {
@@ -157,10 +166,19 @@ public class ScrabbleGameState {
 
     }
 
+    /**
+     * displayRules - displays the rules
+     * @return valid move
+     */
     public boolean displayRules(){
         return false;
     }
 
+    /**
+     * endTurn - ends the current players turn
+     * @param playerIdx index to player attempting to end turn
+     * @return if valid move
+     */
     public boolean endTurn(int playerIdx){
         if (playerIdx != playerTurn) {
             return false;
@@ -172,19 +190,52 @@ public class ScrabbleGameState {
         return true;
     }
 
+    /**
+     * toString - prints out the state of the board
+     * @return String that reports the state
+     */
     @Override
     public String toString(){
         String toReturn = "Current Player turn is: " + (playerTurn + 1);
         toReturn = toReturn +  "\nLetters in the bag are:" + bag.toString();
-        toReturn = toReturn +"\nHere are current player's letters: ";
+        toReturn = toReturn +"\nHere are current player's letters: \n";
         for (int i = 0; i < 4; i++ ){
-            toReturn = toReturn + "\nPlayer" + (i + 1);
-
             toReturn = toReturn + players[i].toString();
         }
         toReturn += "\n\nThis is the state of the board: \n" + scrabbleBoard.toString();
         toReturn = toReturn + "\n\n";
 
         return toReturn;
+    }
+
+    /**
+     * equals - overwrites equals method
+     * @param object
+     * @return
+     */
+    @Override
+    public boolean equals(Object object){
+        if (!(object instanceof ScrabbleGameState)){
+            return false;
+        }
+        ScrabbleGameState scrabGS = (ScrabbleGameState) object;
+        if (scrabGS.playerTurn != playerTurn){
+            return false;
+        }
+        for(int i = 0; i < players.length; i++){
+            if(!(scrabGS.players[i].equals(players[i]))){
+                return false;
+            }
+        }
+        if(!(scrabGS.scrabbleBoard.equals(scrabbleBoard))){
+            return false;
+        }
+        if(!(scrabGS.bag.equals(bag))){
+            return false;
+        }
+        if(!(scrabGS.timer.equals(timer))){
+            return false;
+        }
+        return true;
     }
 }
